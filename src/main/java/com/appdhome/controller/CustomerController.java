@@ -30,8 +30,8 @@ public class CustomerController {
     @Autowired
     private ICustomerService customerService;
 
-    @Autowired
-    private IDistrictService districtService;
+    //@Autowired
+    //private IDistrictService districtService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Listar todos los clientes", notes = "Método para listar a todos los clientes")
