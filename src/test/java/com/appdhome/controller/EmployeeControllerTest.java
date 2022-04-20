@@ -38,7 +38,8 @@ public class EmployeeControllerTest {
     @BeforeEach
     void SetUp(){
         employeeList=new ArrayList<>();
-        employeeList.add(new Employee(2L ,"Gianella","Coronel","7236238","928392","giane@gmail.com","1-1-2002",account,specialty,district));
+        employeeList.add(new Employee(2L ,"Katerin","Coronel","7236238","928392","katy@gmail.com","1-1-2002",account,specialty,district));
+        employeeList.add(new Employee(2L ,"Gianella","Coronel","7238238","928391","giane@gmail.com","1-1-2002",account,specialty,district));
     }
 
     @Test
