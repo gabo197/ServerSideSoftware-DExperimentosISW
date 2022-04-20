@@ -40,7 +40,7 @@ public class AccountControllerTest {
         accountList=new ArrayList<>();
         accountList.add(new Account(1L, "Katerin", "123" , 1,true ));
         accountList.add(new Account(1L, "Gianella", "1234" , 1,true ));
-        accountList.add(new Account(1L, "Jair", "12345" , 1,true ));
+        accountList.add(new Account(1L, "Flavio", "12345" , 1,true ));
 
     }
     @Test
