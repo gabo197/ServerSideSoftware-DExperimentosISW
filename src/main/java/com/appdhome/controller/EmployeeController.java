@@ -29,11 +29,11 @@ public class EmployeeController {
     @Autowired
     private IEmployeeService employeeService;
 
-    @Autowired
-    private ISpecialtyService specialtyService;
+    //@Autowired
+    //private ISpecialtyService specialtyService;
 
-    @Autowired
-    private IDistrictService districtService;
+    //@Autowired
+    //private IDistrictService districtService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value="Listar Trabajadores",notes = "Método para listar todo los trabajadores")
