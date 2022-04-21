@@ -19,6 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @WebMvcTest(controllers=AccountController.class)
 @ActiveProfiles("test")
@@ -29,18 +30,15 @@ public class AccountControllerTest {
     private MockMvc mockMvc;
     @MockBean
     private AccountServiceImpl accountService;
-
     private List<Account> accountList;
-
-
-
 
     @BeforeEach
     void setUp(){
         accountList=new ArrayList<>();
         accountList.add(new Account(1L, "Katerin", "123" , 1,true ));
-        accountList.add(new Account(1L, "Gianella", "1234" , 1,true ));
-        accountList.add(new Account(1L, "Flavio", "12345" , 1,true ));
+        accountList.add(new Account(2L, "Gianella", "1234" , 1,true ));
+        accountList.add(new Account(3L, "Flavio", "12345" , 1,true ));
+        accountList.add(new Account(4L, "julissa", "123456", 2, true ));
 
     }
     @Test
@@ -48,6 +46,19 @@ public class AccountControllerTest {
         given(accountService.getAll()).willReturn(accountList);
         mockMvc.perform(get("/api/auth/account"));
 
+    }
+
+//    US18: Como trabajador quiero iniciar sesión en la aplicación para visualizar si tengo nuevas solicitudes de trabajo.
+    @Test
+    void LogIn() throws Exception{
+        Account account = accountList.get(3);
+        String username = account.getUsername();
+        String password = account.getPassword();
+
+        Optional<Account> expected = accountService.findByUsernameAndPassword(username, password);
+        if (expected.isPresent()) {
+            mockMvc.perform(get("/api/auth/account/login")).andExpect(status().isOk());
+        }
     }
 
 }

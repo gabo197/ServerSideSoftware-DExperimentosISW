@@ -43,11 +43,9 @@ public class EmployeeControllerTest {
     }
 
     @Test
-    void CheckCustomers() throws Exception{
+    void findAll() throws Exception{
         given(employeeService.getAll()).willReturn(employeeList);
         mockMvc.perform(get("/api/employees")).andExpect(status().isOk());
     }
-
-
 }
 
