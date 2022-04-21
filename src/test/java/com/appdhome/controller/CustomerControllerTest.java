@@ -37,6 +37,18 @@ public class CustomerControllerTest {
         customerList = new ArrayList<>();
         customerList.add(new Customer(1L, "Milagros", "Sotomayor", "78478541", "mili@hotmail.com", "998745247", account, district));
         customerList.add(new Customer(2L, "Julissa", "Ponte", "74470551", "juli@hotmail.com", "987654321", new Account(2L, "juli", "654321", 1, true ), district));
+        customerList.add(new Customer(1L, "Katerin", "Villalobos", "78858545","katy@hotmail.com", "97374520", account, district));
+    }
+    
+    @Test
+    void CustomerList() throws Exception{
+        Customer customer = customerList.get(1);
+        Long id = customer.getId();
+
+        Optional<Customer> expected = customerService.getById(id);
+        if (expected.isPresent()) {
+            mockMvc.perform(get("/api/customers/3")).andExpect(status().isOk());
+        }
     }
 
     @Test
