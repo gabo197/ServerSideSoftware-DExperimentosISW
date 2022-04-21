@@ -42,6 +42,7 @@ public class EmployeeControllerTest {
         employeeList.add(new Employee(2L ,"Gianella","Coronel","7238238","928391","giane@gmail.com","1-1-2002",account,specialty,district));
     }
 
+//    US01 Como cliente quiero visualizar la lista de los trabajadores en la plataforma para conocer información relevante de ellos.
     @Test
     void findAll() throws Exception{
         given(employeeService.getAll()).willReturn(employeeList);

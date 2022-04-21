@@ -1,4 +1,3 @@
-//US01 Como cliente quiero visualizar la lista de los trabajadores en la plataforma para conocer información relevante de ellos.
 package com.appdhome.controller;
 
 import com.appdhome.entities.Account;
