@@ -43,19 +43,27 @@ public class AppointmentControllerTest {
         appointmentList.add(new Appointment(2L, "pendiente", "desperfecto en mi lavadora, hace ruido", dateD, "Avenida Aviación", 4, customer, employee, paymentMethod));
     }
 
-//    US05: Como cliente quiero contratar a un trabajador para arreglar el desperfecto de mi hogar.
+///   US05: Como cliente quiero contratar a un trabajador para arreglar el desperfecto de mi hogar.
     @Test
     void Hire() throws Exception{
         given(appointmentService.getAll()).willReturn(appointmentList);
         mockMvc.perform(get("/api/appointments")).andExpect(status().isOk());
     }
 
-//    US06: Como cliente quiero visualizar las citas que he reservado para tener un control de ellas.
+///    US06: Como cliente quiero visualizar las citas que he reservado para tener un control de ellas.
     @Test
     void CheckCustomer() throws Exception{
         List<Appointment> appointmentListP = appointmentService.findByIdCustomer(1L);
         if (appointmentList.get(1) == appointmentListP){
             mockMvc.perform(get("/api/appointments/searchByIdCustomer/1")).andExpect(status().isOk());
+        }
+    }
+///  US13:    Como trabajador quiero visualizar una solicitud de trabajo a detalle para llegar a tiempo al lugar establecido.
+    @Test
+    void CheckAppointment_Employee() throws Exception{
+        List<Appointment> appointments = appointmentService.getAll();
+        if (appointmentList.get(1) == appointmentList){
+            mockMvc.perform(get("/api/appointments/1")).andExpect(status().isOk());
         }
     }
 }

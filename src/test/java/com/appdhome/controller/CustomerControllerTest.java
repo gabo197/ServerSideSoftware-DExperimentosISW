@@ -35,13 +35,19 @@ public class CustomerControllerTest {
     @BeforeEach
     void setUp(){
         customerList = new ArrayList<>();
-        customerList.add(new Customer(1L, "Milagros", "Sotomayor", "78478541", "mili@hotmail.com", "998745247", account, district));
-        customerList.add(new Customer(2L, "Julissa", "Ponte", "74470551", "juli@hotmail.com", "987654321", new Account(2L, "juli", "654321", 1, true ), district));
-        customerList.add(new Customer(1L, "Katerin", "Villalobos", "78858545","katy@hotmail.com", "97374520", account, district));
+        customerList.add(new Customer(1L, "Milagros", "Sotomayor", "78478541", "mili@hotmail.com",
+                "998745247", account, district));
+        customerList.add(new Customer(2L, "Julissa", "Ponte", "74470551", "juli@hotmail.com",
+                "987654321", new Account(2L, "juli", "654321", 1, true ), district));
+        customerList.add(new Customer(1L, "Katerin", "Villalobos", "78858545","katy@hotmail.com",
+                "97374520", account, district));
     }
     
+
+// US14: Como trabajador quiero visualizar un listado de clientes antiguos para tener su información de contacto.
+
     @Test
-    void CustomerList() throws Exception{
+    void Customer_List() throws Exception{
         Customer customer = customerList.get(1);
         Long id = customer.getId();
 
@@ -56,6 +62,7 @@ public class CustomerControllerTest {
         given(customerService.getAll()).willReturn(customerList);
         mockMvc.perform(get("/api/customers")).andExpect(status().isOk());
     }
+
 
 //    US16: Como trabajador quiero revisar el perfil de un cliente antiguo para tener su información de contacto.
     @Test
@@ -124,4 +131,18 @@ public class CustomerControllerTest {
             mockMvc.perform(get("/api/customers/searchFirstnameAndLastname/Julissa/Ponte")).andExpect(status().isOk());
         }
     }
+// US15: Como trabajador quiero buscar a un cliente antiguo para tener su información de contacto.
+
+    @Test
+    void findByAccountIdCustomer() throws Exception{
+        Customer customer = customerList.get(1);
+        Long accountId = customer.getAccount().getId();
+
+        Optional<Customer> expected = customerService.findByIdAccount(accountId);
+        if (expected.isPresent()) {
+            mockMvc.perform(get("searchByIdAccount/1")).andExpect(status().isOk());
+        }
+    }
+
+
 }
