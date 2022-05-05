@@ -66,4 +66,24 @@ public class AppointmentControllerTest {
             mockMvc.perform(get("/api/appointments/1")).andExpect(status().isOk());
         }
     }
+    
+    //    US07: Como cliente quiero visualizar detalles de una cita para revisar los datos de la misma.
+    @Test
+    void AppointmentDetail() throws Exception{
+        List<Appointment> appointmentListP = appointmentService.findByStatus("pendiente");
+        if (appointmentList.get(1) == appointmentListP){
+            mockMvc.perform(get("/api/appointments/searchByStatus/pendiente")).andExpect(status().isOk());
+        }
+    }
+
+    //    US12: Como trabajador quiero visualizar las solicitudes de trabajo para organizar mi tiempo de oficio.
+    @Test
+    void CheckEmployee() throws Exception{
+        List<Appointment> appointmentListP = appointmentService.findByIdEmployee(1L);
+        if (appointmentList.get(1) == appointmentListP){
+            mockMvc.perform(get("/api/appointments/searchByIdEmployee/1")).andExpect(status().isOk());
+        }
+    }
+    
+    
 }
