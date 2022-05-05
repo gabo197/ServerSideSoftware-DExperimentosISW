@@ -48,6 +48,43 @@ public class EmployeeControllerTest {
         given(employeeService.getAll()).willReturn(employeeList);
         mockMvc.perform(get("/api/employees")).andExpect(status().isOk());
     }
+//    US02: Como cliente quiero buscar a un trabajador para solicitar sus servicios en mi hogar
+
+    @Test
+    void findByDni() throws Exception{
+        Employee employee = employeeList.get(1);
+        String dni = employee.getDni();
+
+        Employee expected = employeeService.findByDni(dni);
+        if (expected == employee) {
+            mockMvc.perform(get("/api/employees/searchByIdAccount/74470551")).andExpect(status().isOk());
+        }
+    }
+
+    @Test
+    void findByLastname() throws Exception{
+        Employee employee = employeeList.get(1);
+        String lastname = employee.getLastName();
+
+        List<Employee> expected = employeeService.findByLastName(lastname);
+        if (expected.size() > 0) {
+            mockMvc.perform(get("/api/employees/searchLastname/Ponte")).andExpect(status().isOk());
+        }
+    }
+
+    @Test
+    void findByCompleteName() throws Exception{
+        Employee employee = employeeList.get(1);
+        String firstname = employee.getFirstName();
+        String lastname = employee.getLastName();
+
+        List<Employee> expected = employeeService.findByLastNameAndFirstName(firstname, lastname);
+        if (expected.size() > 0) {
+            mockMvc.perform(get("/api/employee/searchFirstnameAndLastname/Julissa/Ponte")).andExpect(status().isOk());
+        }
+    }
+
+
 //    US19: Como trabajador quiero visualizar mi perfil para verificar si mis datos son correctos.
     @Test
     void findById() throws Exception{
