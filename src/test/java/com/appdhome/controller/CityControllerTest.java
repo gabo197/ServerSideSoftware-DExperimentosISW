@@ -40,7 +40,7 @@ public class CityControllerTest {
     @Test
     void findAllCity() throws Exception {
         given(cityService.getAll()).willReturn(cityList);
-        mockMvc.perform(get("/api/city")).andExpect(status().isOk());
+        mockMvc.perform(get("/api/cities")).andExpect(status().isOk());
     }
 
     @Test
@@ -49,6 +49,6 @@ public class CityControllerTest {
         City city= new City(1L,"Lima");
 
         given(cityService.getById(CityId)).willReturn(Optional.of(city));
-        mockMvc.perform(get("/api/city/{id}",city.getId())).andExpect(status().isOk());
+        mockMvc.perform(get("/api/cities/{id}",city.getId())).andExpect(status().isOk());
     }
 }
