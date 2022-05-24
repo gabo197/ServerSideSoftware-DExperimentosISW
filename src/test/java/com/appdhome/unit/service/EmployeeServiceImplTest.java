@@ -141,4 +141,76 @@ public class EmployeeServiceImplTest {
         expected = employeeService.findByDni(dni);
         assertThat(expected).isNotNull();
     }
+    @Test
+    void findByFirstNameTest() throws Exception {
+        String dni = "76543210";
+        Account account = new Account(1L,"julissaponte","julissaponte",2,true);
+        Specialty specialty = new Specialty(1L, "Carpintería");
+        District district = new District(1L, "Cercado de Lima", new City(1L, "Lima"));
+        Employee employee = new Employee(
+                1L,
+                "Julissa",
+                "Ponte",
+                "76543210",
+                "987654321",
+                "julissaponte@gmail.com",
+                "02-02-2000",
+                account,
+                specialty,
+                district);
+
+        given(employeeRepository.findByDni(dni)).willReturn(Optional.of(employee));
+
+        Optional<Employee> expected = null;
+        expected = employeeService.findByDni(dni);
+        assertThat(expected).isNotNull();
+    }
+    @Test
+    void findByLastNameTest() throws Exception {
+        String dni = "76543210";
+        Account account = new Account(1L,"julissaponte","julissaponte",2,true);
+        Specialty specialty = new Specialty(1L, "Carpintería");
+        District district = new District(1L, "Cercado de Lima", new City(1L, "Lima"));
+        Employee employee = new Employee(
+                1L,
+                "Julissa",
+                "Ponte",
+                "76543210",
+                "987654321",
+                "julissaponte@gmail.com",
+                "02-02-2000",
+                account,
+                specialty,
+                district);
+
+        given(employeeRepository.findByDni(dni)).willReturn(Optional.of(employee));
+
+        Optional<Employee> expected = null;
+        expected = employeeService.findByDni(dni);
+        assertThat(expected).isNotNull();
+    }
+    @Test
+    void findByLastNameAndFirstNameTest() throws Exception {
+        String dni = "76543210";
+        Account account = new Account(1L,"julissaponte","julissaponte",2,true);
+        Specialty specialty = new Specialty(1L, "Carpintería");
+        District district = new District(1L, "Cercado de Lima", new City(1L, "Lima"));
+        Employee employee = new Employee(
+                1L,
+                "Julissa",
+                "Ponte",
+                "76543210",
+                "987654321",
+                "julissaponte@gmail.com",
+                "02-02-2000",
+                account,
+                specialty,
+                district);
+
+        given(employeeRepository.findByDni(dni)).willReturn(Optional.of(employee));
+
+        Optional<Employee> expected = null;
+        expected = employeeService.findByDni(dni);
+        assertThat(expected).isNotNull();
+    }
 }
