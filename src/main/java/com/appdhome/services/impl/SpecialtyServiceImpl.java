@@ -41,7 +41,7 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
     }
 
     @Override
-    public Specialty findByName(String name) throws Exception {
+    public Optional<Specialty> findByName(String name) throws Exception {
         return specialtyRepository.findByName(name);
     }
 }

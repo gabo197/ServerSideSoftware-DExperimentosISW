@@ -2,7 +2,8 @@ package com.appdhome.services;
 
 
 import com.appdhome.entities.Specialty;
+import java.util.Optional;
 
 public interface ISpecialtyService extends CrudService<Specialty>{
-    public Specialty findByName(String name) throws Exception;
+    Optional<Specialty> findByName(String name) throws Exception;
 }

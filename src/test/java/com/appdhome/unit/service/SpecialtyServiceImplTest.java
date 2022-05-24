@@ -1,6 +1,7 @@
 package com.appdhome.unit.service;
 
 import com.appdhome.entities.Specialty;
+import com.appdhome.entities.Specialty;
 import com.appdhome.repository.ISpecialtyRepository;
 import com.appdhome.services.impl.SpecialtyServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -28,14 +29,15 @@ public class SpecialtyServiceImplTest {
     private SpecialtyServiceImpl specialtyService;
     @Test
     public void saveTest() {
-        Specialty specialty = new Specialty(1L, "Carpinteria");
+        Specialty specialty = new Specialty(1L, "Carpintería");
 
         given(specialtyRepository.save(specialty)).willReturn(specialty);
 
         Specialty savedSpecialty = null;
         try {
             savedSpecialty = specialtyRepository.save(specialty);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
         }
 
         assertThat(savedSpecialty).isNotNull();
@@ -44,7 +46,7 @@ public class SpecialtyServiceImplTest {
     @Test
     void findByIdTest() throws Exception{
         Long id = 1L;
-        Specialty specialty = new Specialty(1L, "Carpinteria");
+        Specialty specialty = new Specialty(1L, "Carpintería");
 
         given(specialtyRepository.findById(id)).willReturn(Optional.of(specialty));
 
@@ -55,10 +57,10 @@ public class SpecialtyServiceImplTest {
     @Test
     void findAllTest() throws Exception {
         List<Specialty> list = new ArrayList<>();
-        list.add(new Specialty(1L, "Carpinteria"));
-        list.add(new Specialty(1L, "Electrodomesticos"));
-        list.add(new Specialty(1L, "Cerrajeria"));
-        list.add(new Specialty(1L, "Lavanderia"));
+        list.add(new Specialty(1L, "Carpintería"));
+        list.add(new Specialty(1L, "Electricista"));
+        list.add(new Specialty(1L, "Cerrajería"));
+        list.add(new Specialty(1L, "Lavandería"));
         given(specialtyRepository.findAll()).willReturn(list);
         List<Specialty> expected = specialtyService.getAll();
         assertEquals(expected, list);
@@ -68,5 +70,16 @@ public class SpecialtyServiceImplTest {
         Long id = 1L;
         specialtyService.delete(id);
         verify(specialtyRepository, times(1)).deleteById(id);
+    }
+    @Test
+    void findByNameTest() throws Exception {
+        String name = "Carpintería";
+        Specialty specialty = new Specialty(1L, "Carpintería");
+
+        given(specialtyRepository.findByName(name)).willReturn(Optional.of(specialty));
+
+        Optional<Specialty> expected = null;
+        expected = specialtyService.findByName(name);
+        assertThat(expected).isNotNull();
     }
 }

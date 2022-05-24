@@ -40,7 +40,7 @@ public class CityServiceImpl implements ICityService {
     }
 
     @Override
-    public City findByName(String name) throws Exception {
+    public Optional<City> findByName(String name) throws Exception {
         return cityRepository.findByName(name);
     }
 }

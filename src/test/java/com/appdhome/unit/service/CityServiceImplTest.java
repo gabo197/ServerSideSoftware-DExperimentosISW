@@ -36,7 +36,8 @@ public class CityServiceImplTest {
         City savedCity = null;
         try {
             savedCity = cityRepository.save(city);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
         }
 
         assertThat(savedCity).isNotNull();
@@ -69,5 +70,16 @@ public class CityServiceImplTest {
         Long id = 1L;
         cityService.delete(id);
         verify(cityRepository, times(1)).deleteById(id);
+    }
+    @Test
+    void findByNameTest() throws Exception {
+        String name = "Lima";
+        City city = new City(1L, "Lima");
+
+        given(cityRepository.findByName(name)).willReturn(Optional.of(city));
+
+        Optional<City> expected = null;
+        expected = cityService.findByName(name);
+        assertThat(expected).isNotNull();
     }
 }

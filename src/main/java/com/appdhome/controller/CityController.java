@@ -60,8 +60,6 @@ public class CityController {
         }
     }
 
-
-
     @GetMapping(value = "/searchName/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Buscar ciudad por su nombre", notes = "Método para encontrar ciudades por su nombre")
     @ApiResponses({
@@ -70,8 +68,8 @@ public class CityController {
     })
     public ResponseEntity<City> findByName(@PathVariable("name") String name){
         try {
-            City city=cityService.findByName(name);
-            if (city == null){
+            Optional<City> city = cityService.findByName(name);
+            if (!city.isPresent()){
                 return new ResponseEntity<City>(HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<City>(HttpStatus.OK);

@@ -74,8 +74,8 @@ public class SpecialtyController {
     })
     public ResponseEntity<Specialty> finByName(@PathVariable("name") String name){
         try {
-            Specialty specialty=specialtyService.findByName(name);
-            if (specialty == null){
+            Optional<Specialty> specialty=specialtyService.findByName(name);
+            if (!specialty.isPresent()){
                 return new ResponseEntity<Specialty>(HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<Specialty>(HttpStatus.OK);
