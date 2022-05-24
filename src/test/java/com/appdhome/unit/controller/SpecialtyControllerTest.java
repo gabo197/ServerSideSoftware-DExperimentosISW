@@ -22,15 +22,12 @@ import java.util.Optional;
 @WebMvcTest(controllers= SpecialtyController.class)
 @ActiveProfiles("test")
 public class SpecialtyControllerTest {
-
     @Autowired
     private MockMvc mockMvc;
     @MockBean
     private SpecialtyServiceImpl specialtyService;
-
     private List<Specialty> specialtyList;
 
-    // carga de data
     @BeforeEach
     void setUp(){
         specialtyList=new ArrayList<>();
@@ -44,7 +41,6 @@ public class SpecialtyControllerTest {
         given(specialtyService.getAll()).willReturn(specialtyList);
         mockMvc.perform(get("/api/specialty")).andExpect(status().isOk());
     }
-
     @Test
     void findSpecialtyById() throws Exception{
         Long SpecialtyId=1L;
@@ -53,6 +49,4 @@ public class SpecialtyControllerTest {
         given(specialtyService.getById(SpecialtyId)).willReturn(Optional.of(specialty));
         mockMvc.perform(get("/api/specialty/{id}",specialty.getId())).andExpect(status().isOk());
     }
-
-
 }

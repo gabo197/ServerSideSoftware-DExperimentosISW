@@ -22,12 +22,10 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class SpecialtyServiceImplTest {
-
     @Mock
     private ISpecialtyRepository specialtyRepository;
     @InjectMocks
     private SpecialtyServiceImpl specialtyService;
-
     @Test
     public void saveTest() {
         Specialty specialty = new Specialty(1L, "Carpinteria");
@@ -54,7 +52,6 @@ public class SpecialtyServiceImplTest {
         expected = specialtyService.getById(id);
         assertThat(expected).isNotNull();
     }
-
     @Test
     void findAllTest() throws Exception {
         List<Specialty> list = new ArrayList<>();
@@ -66,7 +63,6 @@ public class SpecialtyServiceImplTest {
         List<Specialty> expected = specialtyService.getAll();
         assertEquals(expected, list);
     }
-
     @Test
     void deleteTest() throws Exception {
         Long id = 1L;

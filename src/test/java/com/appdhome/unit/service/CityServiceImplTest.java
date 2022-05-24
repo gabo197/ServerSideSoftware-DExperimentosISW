@@ -22,7 +22,6 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class CityServiceImplTest {
-
     @Mock
     private ICityRepository cityRepository;
     @InjectMocks
@@ -54,7 +53,6 @@ public class CityServiceImplTest {
         expected = cityService.getById(id);
         assertThat(expected).isNotNull();
     }
-
     @Test
     void findAllTest() throws Exception {
         List<City> list = new ArrayList<>();
@@ -66,7 +64,6 @@ public class CityServiceImplTest {
         List<City> expected = cityService.getAll();
         assertEquals(expected, list);
     }
-
     @Test
     void deleteTest() throws Exception {
         Long id = 1L;

@@ -21,15 +21,12 @@ import java.util.Optional;
 @WebMvcTest(controllers= CityController.class)
 @ActiveProfiles("test")
 public class CityControllerTest {
-
     @Autowired
     private MockMvc mockMvc;
     @MockBean
     private CityServiceImpl cityService;
-
     private List<City> cityList;
 
-    // carga de data
     @BeforeEach
     void setUp(){
         cityList=new ArrayList<>();
@@ -43,12 +40,10 @@ public class CityControllerTest {
         given(cityService.getAll()).willReturn(cityList);
         mockMvc.perform(get("/api/cities")).andExpect(status().isOk());
     }
-
     @Test
     void findCityById() throws Exception{
         Long CityId=1L;
         City city= new City(1L,"Lima");
-
         given(cityService.getById(CityId)).willReturn(Optional.of(city));
         mockMvc.perform(get("/api/cities/{id}",city.getId())).andExpect(status().isOk());
     }

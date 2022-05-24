@@ -24,9 +24,7 @@ import java.util.Optional;
 
 @WebMvcTest(controllers= AccountController.class)
 @ActiveProfiles("test")
-
 public class AccountControllerTest {
-
     @Autowired
     private MockMvc mockMvc;
     @MockBean
@@ -40,28 +38,22 @@ public class AccountControllerTest {
         accountList.add(new Account(2L, "Gianella", "1234" , 1,true ));
         accountList.add(new Account(3L, "Flavio", "12345" , 1,true ));
         accountList.add(new Account(4L, "julissa", "123456", 2, true ));
-
     }
- // US09:    Como cliente quiero iniciar sesión para entrar a la aplicación.
-
+//    US09: Como cliente quiero iniciar sesión para entrar a la aplicación.
     @Test
     void ValidateAccount()throws Exception{
         given(accountService.getAll()).willReturn(accountList);
         mockMvc.perform(get("/api/auth/account"));
-
     }
-
 //    US18: Como trabajador quiero iniciar sesión en la aplicación para visualizar si tengo nuevas solicitudes de trabajo.
     @Test
     void LogIn() throws Exception{
         Account account = accountList.get(3);
         String username = account.getUsername();
         String password = account.getPassword();
-
         Optional<Account> expected = accountService.findByUsernameAndPassword(username, password);
         if (expected.isPresent()) {
             mockMvc.perform(get("/api/auth/account/login")).andExpect(status().isOk());
         }
     }
-
 }
