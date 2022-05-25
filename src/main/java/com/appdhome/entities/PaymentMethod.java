@@ -17,8 +17,6 @@ public class PaymentMethod implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "paymentMethod_id", nullable = false, length = 50)
-    private String paymentMethod;
-
-
+    @Column(name = "name", nullable = false, length = 50)
+    private String name;
 }

@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-// en el diagrama de base de datos tiene que tener la tabla account el username y no la tabla
+
 @Entity
 @Table(name = "account")
 @Data
@@ -21,8 +21,8 @@ public class Account implements Serializable {
     private String username;
     @Column(name="password",nullable = false, length = 15)
     private String password;
-    @Column(name="userType",nullable = true, length = 15)
-    private Integer userType;
+    @Column(name="usertype",nullable = true, length = 15)
+    private Integer usertype;
     @Column(name="verify",nullable = true, length = 15)
     private Boolean verify;
 }

@@ -13,7 +13,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @NamedQuery(name = "Customer.findByFirstName", query = "select c from Customer c where c.firstName = ?1")
-
 public class Customer implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,12 +27,6 @@ public class Customer implements Serializable{
     private String email;
     @Column(name = "cellphone", nullable = false, length = 60)
     private String cellphone;
-    /*
-    @Column(name = "username", nullable = false, length = 60)
-    private String username;
-    @Column(name = "password", nullable = false, length = 20)
-    private String password;
-    */
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id", nullable = false)

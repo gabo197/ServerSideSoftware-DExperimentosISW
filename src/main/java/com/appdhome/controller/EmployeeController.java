@@ -3,32 +3,29 @@ package com.appdhome.controller;
 import com.appdhome.entities.Employee;
 import com.appdhome.services.IEmployeeService;
 import com.appdhome.util.Response;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin
 @RestController
 @RequestMapping("/api/employees")
-@Api(tags = "Employee", value = "RESTFul for Employees")
 public class EmployeeController {
     @Autowired
     private IEmployeeService employeeService;
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Registro de un empleado", notes = "Método que registra un empleado y su especialidad")
+    @PostMapping()
+    @Operation(summary = "Registro de un empleado", description = "Método que registra un empleado y su especialidad")
     @ApiResponses({
-            @ApiResponse(code = 201, message = "Trabajador creado"),
-            @ApiResponse(code = 404, message = "Trabajador no creado")
+            @ApiResponse(responseCode = "201", description = "Trabajador creado"),
+            @ApiResponse(responseCode = "404", description = "Trabajador no creado")
     })
     public ResponseEntity<Employee> insertEmployee(@Valid @RequestBody Employee employee) {
         try {
@@ -40,11 +37,11 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping(value="/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value="Buscar trabajador por id", notes = "Método para encontrar un trabajador con su respectivo id")
+    @GetMapping("/{id}")
+    @Operation(summary="Buscar trabajador por id", description = "Método para encontrar un trabajador con su respectivo id")
     @ApiResponses({
-            @ApiResponse(code = 201, message = "Trabajador encontrado"),
-            @ApiResponse(code = 404, message ="Trabajador no encontrado")
+            @ApiResponse(responseCode = "200", description = "Trabajador encontrado"),
+            @ApiResponse(responseCode = "404", description ="Trabajador no encontrado")
     })
     public ResponseEntity<Employee> findById(@PathVariable("id") Long id) {
         try {
@@ -58,11 +55,11 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value="Listar trabajadores", notes = "Método para listar todo los trabajadores")
+    @GetMapping()
+    @Operation(summary="Listar trabajadores", description = "Método para listar todo los trabajadores")
     @ApiResponses({
-            @ApiResponse(code = 201, message = "Trabajadores encontrados"),
-            @ApiResponse(code = 404, message = "Trabajadores no encontrados")
+            @ApiResponse(responseCode = "200", description = "Trabajadores encontrados"),
+            @ApiResponse(responseCode = "404", description = "Trabajadores no encontrados")
     })
     public ResponseEntity<List<Employee>> findAll() {
         try {
@@ -77,11 +74,11 @@ public class EmployeeController {
         }
     }
 
-    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value="Actualización de datos trabajadores", notes = "Método que actualizar los datos de los trabajadores")
+    @PutMapping("/{id}")
+    @Operation(summary="Actualización de datos trabajadores", description = "Método que actualizar los datos de los trabajadores")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "Datos de trabajadores actualizados"),
-            @ApiResponse(code = 404, message = "Datos de trabajadores no actualizados")
+            @ApiResponse(responseCode ="200" , description = "Datos de trabajadores actualizados"),
+            @ApiResponse(responseCode = "404", description = "Datos de trabajadores no actualizados")
     })
     public ResponseEntity<Employee> updateEmployee(@PathVariable("id") Long id, @Valid @RequestBody Employee employee) {
         try {
@@ -97,11 +94,11 @@ public class EmployeeController {
         }
     }
 
-    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Eliminación de los trabajadores", notes = "Método para eliminar trabajadores")
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Eliminación de los trabajadores", description = "Método para eliminar trabajadores")
     @ApiResponses({
-            @ApiResponse(code=200, message = "Trabajador eliminado"),
-            @ApiResponse(code=404, message = "Trabajador no encontrado")
+            @ApiResponse(responseCode="200", description = "Trabajador eliminado"),
+            @ApiResponse(responseCode="404", description = "Trabajador no encontrado")
     })
     public ResponseEntity<Employee> deleteEmployee(@PathVariable("id") Long id) {
         try {
@@ -116,11 +113,11 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping(value= "/searchByDni/{dni}" , produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value="Buscar trabajador por su DNI", notes = "Método para encontrar un trabajador con su respectivo DNI")
+    @GetMapping("/searchByDni/{dni}")
+    @Operation(summary="Buscar trabajador por su DNI", description = "Método para encontrar un trabajador con su respectivo DNI")
     @ApiResponses({
-            @ApiResponse(code = 201, message = "Trabajador encontrado"),
-            @ApiResponse(code = 404, message ="Trabajador no encontrado")
+            @ApiResponse(responseCode = "200", description = "Trabajador encontrado"),
+            @ApiResponse(responseCode = "404", description ="Trabajador no encontrado")
     })
     public ResponseEntity<Employee> findByDni(@PathVariable("dni") String dni) {
         try {
@@ -134,11 +131,11 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping(value="/searchByFirstname/{firstname}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value="Buscar trabajador por su nombre", notes = "Método para encontrar un trabajador con su respectivo nombre")
+    @GetMapping("/searchByFirstname/{firstname}")
+    @Operation(summary="Buscar trabajador por su nombre", description = "Método para encontrar un trabajador con su respectivo nombre")
     @ApiResponses({
-            @ApiResponse(code = 201, message = "Trabajadores encontrados"),
-            @ApiResponse(code = 404,message = "Trabajadores no encontrados")
+            @ApiResponse(responseCode = "200", description = "Trabajadores encontrados"),
+            @ApiResponse(responseCode = "404",description = "Trabajadores no encontrados")
     })
     public ResponseEntity<List<Employee>> findByFirstName(@PathVariable("firstname") String lastname) {
         try {
@@ -153,11 +150,11 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping(value="/searchByLastname/{lastname}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value="Buscar trabajador por su apellido", notes ="Método para encontrar un trabajador con su respectivo apellido")
+    @GetMapping("/searchByLastname/{lastname}")
+    @Operation(summary="Buscar trabajador por su apellido", description ="Método para encontrar un trabajador con su respectivo apellido")
     @ApiResponses({
-            @ApiResponse(code = 201, message = "Trabajadores encontrados"),
-            @ApiResponse(code = 404, message = "Trabajadores no encontrados")
+            @ApiResponse(responseCode = "200", description = "Trabajadores encontrados"),
+            @ApiResponse(responseCode = "404", description = "Trabajadores no encontrados")
     })
     public ResponseEntity<List<Employee>> findByLastName(@PathVariable("lastname") String lastname) {
         try {
@@ -172,11 +169,11 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping(value="/searchByLastNameAndFirstName/{lastname}/{firstname}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value="Buscar trabajador por su apellido y nombre", notes = "Método para encontrar un trabajador con su respectivo apellido y nombre")
+    @GetMapping("/searchByLastNameAndFirstName/{lastname}/{firstname}")
+    @Operation(summary="Buscar trabajador por su apellido y nombre", description = "Método para encontrar un trabajador con su respectivo apellido y nombre")
     @ApiResponses({
-            @ApiResponse(code=201, message = "Trabajadores encontrados"),
-            @ApiResponse(code =404,message ="Trabajadores no encontrados")
+            @ApiResponse(responseCode="200", description = "Trabajadores encontrados"),
+            @ApiResponse(responseCode ="404",description ="Trabajadores no encontrados")
     })
     public ResponseEntity<List<Employee>> findByLastNameAndFirstName (@PathVariable("lastname") String lastname, @PathVariable("firstname") String firstname) {
         try {
@@ -191,11 +188,11 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping(value="searchByEmail/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value="Buscar trabajador por su email", notes = "Método para encontrar un trabajador con su respectivo email")
+    @GetMapping("searchByEmail/{email}")
+    @Operation(summary="Buscar trabajador por su email", description = "Método para encontrar un trabajador con su respectivo email")
     @ApiResponses({
-            @ApiResponse(code = 201, message = "Trabajador encontrado"),
-            @ApiResponse(code = 404,message = "Trabajador no encontrado")
+            @ApiResponse(responseCode = "200", description = "Trabajador encontrado"),
+            @ApiResponse(responseCode = "404",description = "Trabajador no encontrado")
     })
     public ResponseEntity<Employee> findByEmail(@PathVariable("email") String email) {
         try {
@@ -209,11 +206,11 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping(value="searchByAccountId/{accountId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value="Buscar trabajador por id de la cuenta", notes = "Método para encontrar un trabajador con su respectivo id de la cuenta")
+    @GetMapping("searchByAccountId/{accountId}")
+    @Operation(summary="Buscar trabajador por id de la cuenta", description = "Método para encontrar un trabajador con su respectivo id de la cuenta")
     @ApiResponses({
-            @ApiResponse(code = 201, message = "Trabajador encontrado"),
-            @ApiResponse(code = 404,message = "Trabajador no encontrado")
+            @ApiResponse(responseCode = "200", description = "Trabajador encontrado"),
+            @ApiResponse(responseCode = "404",description = "Trabajador no encontrado")
     })
     public ResponseEntity<Employee> findByAccountId(@PathVariable("accountId") Long accountId) {
         try {
@@ -227,11 +224,11 @@ public class EmployeeController {
         }
     }
 
-    @PostMapping( value = "/validateEmail",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Validar correo de employee", notes = "Validar corre de employee")
+    @PostMapping("/validateEmail")
+    @Operation(summary = "Validar correo de employee", description = "Validar corre de employee")
     @ApiResponses({
-            @ApiResponse(code = 201, message = "Valid Email"),
-            @ApiResponse(code = 404, message = "Invalid Email")
+            @ApiResponse(responseCode = "200", description = "Valid Email"),
+            @ApiResponse(responseCode = "404", description = "Invalid Email")
     })
     public ResponseEntity<?> validateEmailEmployee(@Valid @RequestBody Employee employee) {
         try {
