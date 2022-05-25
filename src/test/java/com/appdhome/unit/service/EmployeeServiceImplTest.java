@@ -3,6 +3,7 @@ package com.appdhome.unit.service;
 import com.appdhome.entities.*;
 import com.appdhome.repository.IEmployeeRepository;
 import com.appdhome.services.impl.EmployeeServiceImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -24,30 +25,26 @@ public class EmployeeServiceImplTest {
     private IEmployeeRepository employeeRepository;
     @InjectMocks
     private EmployeeServiceImpl employeeService;
+    Account account;
+    Specialty specialty;
+    District district;
+    Employee employee;
+    @BeforeEach
+    void setUp() {
+        account = new Account(1L,"julissaponteT","julissaponteT",2,true);
+        specialty = new Specialty(1L,"Carpintería");
+        district = new District(1L,"Cercado de Lima", new City(1L, "Lima"));
+        employee = new Employee(1L,"Julissa", "Ponte", "76543210", "987654321", "julissaponte@gmail.com", "02-02-2000", account, specialty, district);
+    }
     @Test
     public void saveTest() {
-        Account account = new Account(1L,"julissaponteT","julissaponteT",2,true);
-        Specialty specialty = new Specialty(1L, "Carpintería");
-        District district = new District(1L, "Cercado de Lima", new City(1L, "Lima"));
-        Employee employee = new Employee(
-                1L,
-                "Julissa",
-                "Ponte",
-                "76543210",
-                "987654321",
-                "julissaponte@gmail.com",
-                "02-02-2000",
-                account,
-                specialty,
-                district);
-
         given(employeeRepository.save(employee)).willReturn(employee);
 
         Employee savedEmployee = null;
         try {
             savedEmployee = employeeRepository.save(employee);
         }
-        catch (Exception e) {
+        catch (Exception ignored) {
         }
 
         assertThat(savedEmployee).isNotNull();
@@ -56,47 +53,17 @@ public class EmployeeServiceImplTest {
     @Test
     void findByIdTest() throws Exception{
         Long id = 1L;
-        Account account = new Account(1L,"julissaponte","julissaponte",2,true);
-        Specialty specialty = new Specialty(1L, "Carpintería");
-        District district = new District(1L, "Cercado de Lima", new City(1L, "Lima"));
-        Employee employee = new Employee(
-                1L,
-                "Julissa",
-                "Ponte",
-                "76543210",
-                "987654321",
-                "julissaponte@gmail.com",
-                "02-02-2000",
-                account,
-                specialty,
-                district);
 
         given(employeeRepository.findById(id)).willReturn(Optional.of(employee));
 
-        Optional<Employee> expected = null;
+        Optional<Employee> expected;
         expected = employeeService.getById(id);
         assertThat(expected).isNotNull();
     }
     @Test
     void findAllTest() throws Exception {
-        Account account = new Account(1L,"julissaponte","julissaponte",2,true);
         Account account2 = new Account(2L,"julesponte","julesponte",2,true);
-        Specialty specialty = new Specialty(1L, "Carpintería");
-        District district = new District(1L, "Cercado de Lima", new City(1L, "Lima"));
-
-        List<Employee> list = new ArrayList<>();
-        list.add(new Employee(
-                1L,
-                "Julissa",
-                "Ponte",
-                "76543210",
-                "987654321",
-                "julissaponte@gmail.com",
-                "02-02-2000",
-                account,
-                specialty,
-                district));
-        list.add(new Employee(
+        Employee employee2 = new Employee(
                 2L,
                 "Jules",
                 "Ponte",
@@ -106,7 +73,11 @@ public class EmployeeServiceImplTest {
                 "03-03-2000",
                 account2,
                 specialty,
-                district));
+                district);
+
+        List<Employee> list = new ArrayList<>();
+        list.add(employee);
+        list.add(employee2);
         given(employeeRepository.findAll()).willReturn(list);
         List<Employee> expected = employeeService.getAll();
         assertEquals(expected, list);
@@ -120,97 +91,65 @@ public class EmployeeServiceImplTest {
     @Test
     void findByDniTest() throws Exception {
         String dni = "76543210";
-        Account account = new Account(1L,"julissaponte","julissaponte",2,true);
-        Specialty specialty = new Specialty(1L, "Carpintería");
-        District district = new District(1L, "Cercado de Lima", new City(1L, "Lima"));
-        Employee employee = new Employee(
-                1L,
-                "Julissa",
-                "Ponte",
-                "76543210",
-                "987654321",
-                "julissaponte@gmail.com",
-                "02-02-2000",
-                account,
-                specialty,
-                district);
 
         given(employeeRepository.findByDni(dni)).willReturn(Optional.of(employee));
 
-        Optional<Employee> expected = null;
+        Optional<Employee> expected;
         expected = employeeService.findByDni(dni);
         assertThat(expected).isNotNull();
     }
     @Test
     void findByFirstNameTest() throws Exception {
-        String dni = "76543210";
-        Account account = new Account(1L,"julissaponte","julissaponte",2,true);
-        Specialty specialty = new Specialty(1L, "Carpintería");
-        District district = new District(1L, "Cercado de Lima", new City(1L, "Lima"));
-        Employee employee = new Employee(
-                1L,
-                "Julissa",
-                "Ponte",
-                "76543210",
-                "987654321",
-                "julissaponte@gmail.com",
-                "02-02-2000",
-                account,
-                specialty,
-                district);
+        String firstname = "Julissa";
+        List<Employee> list = new ArrayList<>();
+        list.add(employee);
 
-        given(employeeRepository.findByDni(dni)).willReturn(Optional.of(employee));
+        given(employeeRepository.findByFirstName(firstname)).willReturn(list);
 
-        Optional<Employee> expected = null;
-        expected = employeeService.findByDni(dni);
-        assertThat(expected).isNotNull();
+        List<Employee> expected = employeeService.findByFirstName(firstname);
+        assertEquals(expected, list);
     }
     @Test
     void findByLastNameTest() throws Exception {
-        String dni = "76543210";
-        Account account = new Account(1L,"julissaponte","julissaponte",2,true);
-        Specialty specialty = new Specialty(1L, "Carpintería");
-        District district = new District(1L, "Cercado de Lima", new City(1L, "Lima"));
-        Employee employee = new Employee(
-                1L,
-                "Julissa",
-                "Ponte",
-                "76543210",
-                "987654321",
-                "julissaponte@gmail.com",
-                "02-02-2000",
-                account,
-                specialty,
-                district);
+        String lastname = "Ponte";
+        List<Employee> list = new ArrayList<>();
+        list.add(employee);
 
-        given(employeeRepository.findByDni(dni)).willReturn(Optional.of(employee));
+        given(employeeRepository.findByLastName(lastname)).willReturn(list);
 
-        Optional<Employee> expected = null;
-        expected = employeeService.findByDni(dni);
-        assertThat(expected).isNotNull();
+        List<Employee> expected = employeeService.findByLastName(lastname);
+        assertEquals(expected, list);
     }
     @Test
     void findByLastNameAndFirstNameTest() throws Exception {
-        String dni = "76543210";
-        Account account = new Account(1L,"julissaponte","julissaponte",2,true);
-        Specialty specialty = new Specialty(1L, "Carpintería");
-        District district = new District(1L, "Cercado de Lima", new City(1L, "Lima"));
-        Employee employee = new Employee(
-                1L,
-                "Julissa",
-                "Ponte",
-                "76543210",
-                "987654321",
-                "julissaponte@gmail.com",
-                "02-02-2000",
-                account,
-                specialty,
-                district);
+        String firstname = "Julissa";
+        String lastname = "Ponte";
+        List<Employee> list = new ArrayList<>();
+        list.add(employee);
 
-        given(employeeRepository.findByDni(dni)).willReturn(Optional.of(employee));
+        given(employeeRepository.findByLastNameAndFirstName(lastname, firstname)).willReturn(list);
 
-        Optional<Employee> expected = null;
-        expected = employeeService.findByDni(dni);
+        List<Employee> expected = employeeService.findByLastNameAndFirstName(lastname, firstname);
+        assertEquals(expected, list);
+    }
+    @Test
+    void findByEmailTest() throws Exception {
+        String email = "julissaponte@gmail.com";
+
+        given(employeeRepository.findByEmail(email)).willReturn(Optional.of(employee));
+
+        Optional<Employee> expected;
+        expected = employeeService.findByEmail(email);
+        assertThat(expected).isNotNull();
+    }
+    @Test
+    void findByAccountId() throws Exception {
+        Long accountId = 1L;
+
+        given(employeeRepository.findByAccountId(1L)).willReturn(Optional.of(employee));
+
+        Optional<Employee> expected;
+        expected = employeeService.findByAccountId(accountId);
         assertThat(expected).isNotNull();
     }
 }

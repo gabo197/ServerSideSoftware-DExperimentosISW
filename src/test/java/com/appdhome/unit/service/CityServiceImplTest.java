@@ -8,11 +8,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -37,7 +35,7 @@ public class CityServiceImplTest {
         try {
             savedCity = cityRepository.save(city);
         }
-        catch (Exception e) {
+        catch (Exception ignored) {
         }
 
         assertThat(savedCity).isNotNull();
@@ -50,7 +48,7 @@ public class CityServiceImplTest {
 
         given(cityRepository.findById(id)).willReturn(Optional.of(city));
 
-        Optional<City> expected = null;
+        Optional<City> expected;
         expected = cityService.getById(id);
         assertThat(expected).isNotNull();
     }
@@ -78,7 +76,7 @@ public class CityServiceImplTest {
 
         given(cityRepository.findByName(name)).willReturn(Optional.of(city));
 
-        Optional<City> expected = null;
+        Optional<City> expected;
         expected = cityService.findByName(name);
         assertThat(expected).isNotNull();
     }

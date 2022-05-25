@@ -24,34 +24,31 @@ public class EmployeeController {
     @Autowired
     private IEmployeeService employeeService;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value="Listar Trabajadores",notes = "Método para listar todo los trabajadores")
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Registro de un empleado", notes = "Método que registra un empleado y su especialidad")
     @ApiResponses({
-            @ApiResponse(code=201,message = "Trabajadores encontrados"),
-            @ApiResponse(code=404, message = "Trabajadores no encontrados")
+            @ApiResponse(code = 201, message = "Trabajador creado"),
+            @ApiResponse(code = 404, message = "Trabajador no creado")
     })
-    public ResponseEntity<List<Employee>> findAll(){
+    public ResponseEntity<Employee> insertEmployee(@Valid @RequestBody Employee employee) {
         try {
-            List<Employee> employees=employeeService.getAll();
-            if (employees.size()>0)
-                return new ResponseEntity<>(employees, HttpStatus.OK);
-            else
-                return new ResponseEntity<>(employees,HttpStatus.NOT_FOUND);
+            Employee employeeNew = employeeService.save(employee);
+            return ResponseEntity.status(HttpStatus.CREATED).body(employeeNew);
         }
-        catch (Exception e) {
+        catch (Exception ex) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping(value="/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value="Buscar trabajador por id", notes ="Método para encontrar un trabajador con su respectivo id" )
+    @ApiOperation(value="Buscar trabajador por id", notes = "Método para encontrar un trabajador con su respectivo id")
     @ApiResponses({
-            @ApiResponse(code=201, message = "Trabajador encontrado"),
-            @ApiResponse(code=404,message ="Trabajador no encontrado")
+            @ApiResponse(code = 201, message = "Trabajador encontrado"),
+            @ApiResponse(code = 404, message ="Trabajador no encontrado")
     })
-    public ResponseEntity<Employee> findById(@PathVariable("id") Long id){
+    public ResponseEntity<Employee> findById(@PathVariable("id") Long id) {
         try {
-            Optional<Employee> employee= employeeService.getById(id);
+            Optional<Employee> employee = employeeService.getById(id);
             if (!employee.isPresent())
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             return new ResponseEntity<>(employee.get(),HttpStatus.OK);
@@ -61,29 +58,69 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping(value="searchByAccountId/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value="Buscar trabajador por id de la cuenta", notes ="Método para encontrar un trabajador con su respectivo id de la cuenta" )
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value="Listar trabajadores", notes = "Método para listar todo los trabajadores")
     @ApiResponses({
-            @ApiResponse(code=201, message = "Trabajador encontrado"),
-            @ApiResponse(code=404,message ="Trabajador no encontrado")
+            @ApiResponse(code = 201, message = "Trabajadores encontrados"),
+            @ApiResponse(code = 404, message = "Trabajadores no encontrados")
     })
-    public ResponseEntity<Employee> findByIdAccount(@PathVariable("id") Long id){
+    public ResponseEntity<List<Employee>> findAll() {
         try {
-            Optional<Employee> employee= employeeService.findByAccountId(id);
-            if (!employee.isPresent())
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            return new ResponseEntity<>(employee.get(),HttpStatus.OK);
+            List<Employee> employees = employeeService.getAll();
+            if (employees.size() > 0)
+                return new ResponseEntity<>(employees, HttpStatus.OK);
+            else
+                return new ResponseEntity<>(employees, HttpStatus.NOT_FOUND);
         }
-        catch (Exception e){
+        catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value="Actualización de datos trabajadores", notes = "Método que actualizar los datos de los trabajadores")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Datos de trabajadores actualizados"),
+            @ApiResponse(code = 404, message = "Datos de trabajadores no actualizados")
+    })
+    public ResponseEntity<Employee> updateEmployee(@PathVariable("id") Long id, @Valid @RequestBody Employee employee) {
+        try {
+            Optional<Employee> employeeUp = employeeService.getById(id);
+            if(!employeeUp.isPresent())
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            employee.setId(id);
+            employeeService.save(employee);
+            return new ResponseEntity<>(employee, HttpStatus.OK);
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Eliminación de los trabajadores", notes = "Método para eliminar trabajadores")
+    @ApiResponses({
+            @ApiResponse(code=200, message = "Trabajador eliminado"),
+            @ApiResponse(code=404, message = "Trabajador no encontrado")
+    })
+    public ResponseEntity<Employee> deleteEmployee(@PathVariable("id") Long id) {
+        try {
+            Optional<Employee> employeeDelete = employeeService.getById(id);
+            if(!employeeDelete.isPresent())
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            employeeService.delete(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping(value= "/searchByDni/{dni}" , produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value="Buscar trabajador por DNI", notes ="Método para encontrar un trabajador con su respectivo DNI" )
+    @ApiOperation(value="Buscar trabajador por su DNI", notes = "Método para encontrar un trabajador con su respectivo DNI")
     @ApiResponses({
-            @ApiResponse(code=201, message = "Trabajador encontrado"),
-            @ApiResponse(code =404,message ="Trabajador no encontrado")
+            @ApiResponse(code = 201, message = "Trabajador encontrado"),
+            @ApiResponse(code = 404, message ="Trabajador no encontrado")
     })
     public ResponseEntity<Employee> findByDni(@PathVariable("dni") String dni) {
         try {
@@ -97,33 +134,51 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping(value="/searchByLastname/{lastname}",produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value="Buscar trabajador por su apellido", notes ="Método para encontrar un trabajador con su respectivo apellido" )
+    @GetMapping(value="/searchByFirstname/{firstname}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value="Buscar trabajador por su nombre", notes = "Método para encontrar un trabajador con su respectivo nombre")
     @ApiResponses({
-            @ApiResponse(code=201, message = "Trabajadores  encontrados"),
-            @ApiResponse(code =404,message ="Trabajadores no encontrados")
+            @ApiResponse(code = 201, message = "Trabajadores encontrados"),
+            @ApiResponse(code = 404,message = "Trabajadores no encontrados")
     })
-    public ResponseEntity<List<Employee>> findByLastName(@PathVariable("lastname") String lastname){
-        try{
-            List<Employee> employees=employeeService.findByLastName(lastname);
-            if(employees.size()>0)
+    public ResponseEntity<List<Employee>> findByFirstName(@PathVariable("firstname") String lastname) {
+        try {
+            List<Employee> employees = employeeService.findByFirstName(lastname);
+            if(employees.size() > 0)
                 return new ResponseEntity<>(employees,HttpStatus.OK);
             else
                 return new ResponseEntity<>(employees,HttpStatus.NOT_FOUND);
-        }catch (Exception e){
+        }
+        catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-
         }
     }
 
-    @GetMapping(value="/searchByLastNameandFirstName/{lastname}/{firstname}",produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value="Buscar trabajador por su apellido y nombre", notes ="Método para encontrar un trabajador con su respectivo apellido y nombre" )
+    @GetMapping(value="/searchByLastname/{lastname}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value="Buscar trabajador por su apellido", notes ="Método para encontrar un trabajador con su respectivo apellido")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Trabajadores encontrados"),
+            @ApiResponse(code = 404, message = "Trabajadores no encontrados")
+    })
+    public ResponseEntity<List<Employee>> findByLastName(@PathVariable("lastname") String lastname) {
+        try {
+            List<Employee> employees = employeeService.findByLastName(lastname);
+            if (employees.size() > 0)
+                return new ResponseEntity<>(employees,HttpStatus.OK);
+            else
+                return new ResponseEntity<>(employees,HttpStatus.NOT_FOUND);
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value="/searchByLastNameAndFirstName/{lastname}/{firstname}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value="Buscar trabajador por su apellido y nombre", notes = "Método para encontrar un trabajador con su respectivo apellido y nombre")
     @ApiResponses({
             @ApiResponse(code=201, message = "Trabajadores encontrados"),
             @ApiResponse(code =404,message ="Trabajadores no encontrados")
     })
-    public ResponseEntity<List<Employee>> findByLastNameAndFirstName (@PathVariable("lastname") String lastname, @PathVariable("firstname") String firstname)
-    {
+    public ResponseEntity<List<Employee>> findByLastNameAndFirstName (@PathVariable("lastname") String lastname, @PathVariable("firstname") String firstname) {
         try {
             List<Employee> employees=employeeService.findByLastNameAndFirstName(lastname,firstname);
             if(employees.size() > 0)
@@ -136,18 +191,38 @@ public class EmployeeController {
         }
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Registro de un empleado", notes = "Método que registra un empleado y su especialidad")
+    @GetMapping(value="searchByEmail/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value="Buscar trabajador por su email", notes = "Método para encontrar un trabajador con su respectivo email")
     @ApiResponses({
-            @ApiResponse(code = 201, message = "Employee creado"),
-            @ApiResponse(code = 404, message = "Employee no creado")
+            @ApiResponse(code = 201, message = "Trabajador encontrado"),
+            @ApiResponse(code = 404,message = "Trabajador no encontrado")
     })
-    public ResponseEntity<Employee> insertEmployee(@Valid @RequestBody Employee employee){
+    public ResponseEntity<Employee> findByEmail(@PathVariable("email") String email) {
         try {
-            Employee employeeNew = employeeService.save(employee);
-            return ResponseEntity.status(HttpStatus.CREATED).body(employeeNew);
+            Optional<Employee> employee = employeeService.findByEmail(email);
+            if (!employee.isPresent())
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(employee.get(),HttpStatus.OK);
         }
-        catch (Exception ex) {
+        catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value="searchByAccountId/{accountId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value="Buscar trabajador por id de la cuenta", notes = "Método para encontrar un trabajador con su respectivo id de la cuenta")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Trabajador encontrado"),
+            @ApiResponse(code = 404,message = "Trabajador no encontrado")
+    })
+    public ResponseEntity<Employee> findByAccountId(@PathVariable("accountId") Long accountId) {
+        try {
+            Optional<Employee> employee = employeeService.findByAccountId(accountId);
+            if (!employee.isPresent())
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(employee.get(),HttpStatus.OK);
+        }
+        catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -158,7 +233,7 @@ public class EmployeeController {
             @ApiResponse(code = 201, message = "Valid Email"),
             @ApiResponse(code = 404, message = "Invalid Email")
     })
-    public ResponseEntity<?> validateEmailEmployee(@Valid @RequestBody Employee employee){
+    public ResponseEntity<?> validateEmailEmployee(@Valid @RequestBody Employee employee) {
         try {
             Optional<Employee> employeeEmail = employeeService.findByEmail(employee.getEmail());
             if(!employeeEmail.isPresent()) {
@@ -170,47 +245,6 @@ public class EmployeeController {
         }
         catch (Exception ex) {
             return new ResponseEntity<Employee>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value="Actualización de datos trabajadores",notes="Método que actualizar los datos de los trabajadores")
-    @ApiResponses({
-            @ApiResponse(code=200, message = "Datos de trabajadores actualizados"),
-            @ApiResponse(code=404, message = "Datos de trabajadores no actualizados")
-            }
-    )
-    public ResponseEntity<Employee> updateEmployee(
-            @PathVariable("id") Long id, @Valid @RequestBody Employee employee) {
-        try {
-            Optional<Employee> employeeUp = employeeService.getById(id);
-            if(!employeeUp.isPresent())
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            employee.setId(id);
-            employeeService.save(employee);
-            return new ResponseEntity<>(employee, HttpStatus.OK);
-        }
-        catch(Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Eliminación de los trabajadores", notes = "Método para eliminar trabajadores")
-    @ApiResponses({
-            @ApiResponse(code=200, message = "Trabajador eliminado"),
-            @ApiResponse(code=404, message = "Trabajador no encontrado")
-    })
-    public ResponseEntity<Employee> deleteEmployee(@PathVariable("id")Long id){
-        try {
-            Optional<Employee>employeeDelete=employeeService.getById(id);
-            if(!employeeDelete.isPresent())
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            employeeService.delete(id);
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-        catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
