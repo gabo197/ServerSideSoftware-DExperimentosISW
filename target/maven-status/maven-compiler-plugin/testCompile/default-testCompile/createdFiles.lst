@@ -1,0 +1,9 @@
+com\appdhome\unit\service\AppointmentServiceImplTest.class
+com\appdhome\unit\service\SpecialtyServiceImplTest.class
+com\appdhome\unit\service\PaymentMethodsServiceImplTest.class
+com\appdhome\unit\service\EmployeeServiceImplTest.class
+com\appdhome\unit\service\CustomerServiceImplTest.class
+com\appdhome\AppdhomeApplicationTests.class
+com\appdhome\unit\service\DistrictServiceImplTest.class
+com\appdhome\unit\service\AccountServiceImplTest.class
+com\appdhome\unit\service\CityServiceImplTest.class

@@ -26,6 +26,7 @@ public class EmployeeServiceImplTest {
     @InjectMocks
     private EmployeeServiceImpl employeeService;
     Account account;
+//Necessary
     Specialty specialty;
     District district;
     Employee employee;
