@@ -11,9 +11,9 @@
     <artifactId>appdhome</artifactId>
     <version>1.0</version>
     <name>appdhome</name>
-<!--    <properties>-->
-<!--         <java.version>11</java.version> -->
-<!--    </properties>-->
+   <properties>
+        <java.version>11</java.version>
+   </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
