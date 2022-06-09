@@ -50,7 +50,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="D:/Program Files/Java/apache-maven-3.8.2-bin/apache-maven-3.8.2" />
+        <option name="mavenHome" value="D:/Program Files/Java/apache-maven-3.6.2-bin/apache-maven-3.6.2" />
         <option name="useMavenConfig" value="true" />
       </MavenGeneralSettings>
     </option>
@@ -78,7 +78,7 @@
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "E:/Study/UPC/Ciclos/Ciclo2022-01/DesignOfExperiments/Codes/ServerSideSoftware-DExperimentosISW/src/main/java/com/appdhome/resource",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Problems",
+    "project.structure.last.edited": "SDKs",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "MavenSettings",
@@ -229,6 +229,8 @@
       <workItem from="1654796481313" duration="126000" />
       <workItem from="1654796638051" duration="339000" />
       <workItem from="1654797002862" duration="2389000" />
+      <workItem from="1654799511067" duration="116000" />
+      <workItem from="1654799970302" duration="38000" />
     </task>
     <servers />
   </component>
