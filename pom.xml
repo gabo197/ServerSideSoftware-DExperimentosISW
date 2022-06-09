@@ -12,7 +12,7 @@
     <version>1.0</version>
     <name>appdhome</name>
     <properties>
-        <java.version>11</java.version>
+<!--         <java.version>11</java.version> -->
     </properties>
     <dependencies>
         <dependency>
