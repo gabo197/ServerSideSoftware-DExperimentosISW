@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bbc29ca-8cc5-450b-97b8-f7b97d5d4c54" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appdhome.iml" beforeDir="false" afterPath="$PROJECT_DIR$/appdhome.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +50,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="D:/Program Files/Java/apache-maven-3.8.5-bin/apache-maven-3.8.5" />
+        <option name="mavenHome" value="D:/Program Files/Java/apache-maven-3.8.1-bin/apache-maven-3.8.1" />
         <option name="useMavenConfig" value="true" />
       </MavenGeneralSettings>
     </option>
@@ -70,25 +66,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/Study/UPC/Ciclos/Ciclo2022-01/DesignOfExperiments/Codes/ServerSideSoftware-DExperimentosISW/src/main/java/com/appdhome/resource&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Problems&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;230b3dac305ea1e8c571c29a68eafd58&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "E:/Study/UPC/Ciclos/Ciclo2022-01/DesignOfExperiments/Codes/ServerSideSoftware-DExperimentosISW/src/main/java/com/appdhome/resource",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Problems",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "MavenSettings",
+    "spring.configuration.checksum": "230b3dac305ea1e8c571c29a68eafd58"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\Study\UPC\Ciclos\Ciclo2022-01\DesignOfExperiments\Codes\ServerSideSoftware-DExperimentosISW\src\main\java\com\appdhome\resource" />
@@ -101,17 +97,17 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.DemoApplication">
-    <configuration name="CityServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ServerSideSoftware-OpenSource" />
+  <component name="RunManager" selected="JUnit.AppdhomeApplicationTests">
+    <configuration name="AppdhomeApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="appdhome" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.appdhome.unit.service.*" />
+          <option name="PATTERN" value="com.appdhome.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.appdhome.unit.service" />
-      <option name="MAIN_CLASS_NAME" value="com.appdhome.unit.service.CityServiceImplTest" />
+      <option name="PACKAGE_NAME" value="com.appdhome" />
+      <option name="MAIN_CLASS_NAME" value="com.appdhome.AppdhomeApplicationTests" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -132,22 +128,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EmployeeServiceImplTest.saveTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ServerSideSoftware-OpenSource" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.appdhome.unit.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.appdhome.unit.service" />
-      <option name="MAIN_CLASS_NAME" value="com.appdhome.unit.service.EmployeeServiceImplTest" />
-      <option name="METHOD_NAME" value="saveTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="SpecialtyServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ServerSideSoftware-OpenSource" />
       <extension name="coverage">
@@ -159,6 +139,20 @@
       <option name="PACKAGE_NAME" value="com.appdhome.unit.service" />
       <option name="MAIN_CLASS_NAME" value="com.appdhome.unit.service.SpecialtyServiceImplTest" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="com.appdhome in appdhome" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="appdhome" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.appdhome.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.appdhome" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -187,20 +181,20 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="JUnit.AppdhomeApplicationTests" />
+      <item itemvalue="JUnit.com.appdhome in appdhome" />
       <item itemvalue="JUnit.com.appdhome.unit.service in appdhome" />
-      <item itemvalue="JUnit.CityServiceImplTest" />
       <item itemvalue="JUnit.EmployeeServiceImplTest" />
-      <item itemvalue="JUnit.EmployeeServiceImplTest.saveTest" />
       <item itemvalue="JUnit.SpecialtyServiceImplTest" />
       <item itemvalue="Spring Boot.DemoApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.AppdhomeApplicationTests" />
+        <item itemvalue="JUnit.com.appdhome in appdhome" />
         <item itemvalue="JUnit.com.appdhome.unit.service in appdhome" />
         <item itemvalue="JUnit.SpecialtyServiceImplTest" />
         <item itemvalue="JUnit.EmployeeServiceImplTest" />
-        <item itemvalue="JUnit.CityServiceImplTest" />
-        <item itemvalue="JUnit.EmployeeServiceImplTest.saveTest" />
       </list>
     </recent_temporary>
   </component>
@@ -222,7 +216,8 @@
       <workItem from="1653583861047" duration="1753000" />
       <workItem from="1654763457976" duration="2842000" />
       <workItem from="1654781098281" duration="1522000" />
-      <workItem from="1654782643468" duration="5381000" />
+      <workItem from="1654782643468" duration="5547000" />
+      <workItem from="1654790740071" duration="1374000" />
     </task>
     <servers />
   </component>
