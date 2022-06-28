@@ -66,4 +66,9 @@ public class EmployeeServiceImpl implements IEmployeeService {
     public Optional<Employee> findByAccountId(Long id) throws Exception {
         return employeeRepository.findByAccountId(id);
     }
+
+    @Override
+    public List<Employee> findByBirthday(String birthday) throws Exception{
+        return employeeRepository.findByBirthday(birthday);
+    }
 }

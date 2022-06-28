@@ -11,4 +11,5 @@ public interface IEmployeeService extends CrudService<Employee> {
     public List<Employee> findByLastNameAndFirstName(String lastname,String firstname)throws Exception;
     public Optional<Employee> findByEmail(String email) throws Exception;
     public Optional<Employee> findByAccountId(Long id) throws Exception;
+    public List<Employee> findByBirthday(String birthday)throws Exception;
 }

@@ -224,6 +224,25 @@ public class EmployeeController {
         }
     }
 
+    @GetMapping("/searchByGender/{gender}")
+    @Operation(summary="Buscar trabajador por su género", description = "Método para encontrar un trabajador con su respectivo género")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Trabajadores encontrados"),
+            @ApiResponse(responseCode = "404",description = "Trabajadores no encontrados")
+    })
+    public ResponseEntity<List<Employee>> findByGender(@PathVariable("gender") String gender) {
+        try {
+            List<Employee> employees = employeeService.findByBirthday(gender);
+            if(employees.size() > 0)
+                return new ResponseEntity<>(employees,HttpStatus.OK);
+            else
+                return new ResponseEntity<>(employees,HttpStatus.NOT_FOUND);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/validateEmail")
     @Operation(summary = "Validar correo de employee", description = "Validar corre de employee")
     @ApiResponses({

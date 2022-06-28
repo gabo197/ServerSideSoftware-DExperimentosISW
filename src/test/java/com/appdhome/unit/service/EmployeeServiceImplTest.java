@@ -35,7 +35,7 @@ public class EmployeeServiceImplTest {
         account = new Account(1L,"julissaponteT","julissaponteT",2,true);
         specialty = new Specialty(1L,"Carpintería");
         district = new District(1L,"Cercado de Lima", new City(1L,"Lima"));
-        employee = new Employee(1L,"Julissa","Ponte","76543210","987654321","julissaponte@gmail.com","02-02-2000", account, specialty, district);
+        employee = new Employee(1L,"Julissa","Ponte","76543210","987654321","julissaponte@gmail.com","female", account, specialty, district);
     }
     @Test
     public void saveTest() {
@@ -64,7 +64,7 @@ public class EmployeeServiceImplTest {
     @Test
     void findAllTest() throws Exception {
         Account account2 = new Account(2L,"julesponte","julesponte",2,true);
-        Employee employee2 = new Employee(2L,"Jules","Ponte","76543211","997654321","julesponte@gmail.com","03-03-2000", account2, specialty, district);
+        Employee employee2 = new Employee(2L,"Jules","Ponte","76543211","997654321","julesponte@gmail.com","female", account2, specialty, district);
 
         List<Employee> list = new ArrayList<>();
         list.add(employee);
@@ -142,5 +142,17 @@ public class EmployeeServiceImplTest {
         Optional<Employee> expected;
         expected = employeeService.findByAccountId(accountId);
         assertThat(expected).isNotNull();
+    }
+
+    @Test
+    void findByGenderTest() throws Exception {
+        String birthday = "female";
+        List<Employee> list = new ArrayList<>();
+        list.add(employee);
+
+        given(employeeRepository.findByBirthday(birthday)).willReturn(list);
+
+        List<Employee> expected = employeeService.findByBirthday(birthday);
+        assertEquals(expected, list);
     }
 }
