@@ -104,8 +104,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${project.parent.version}</version>
                 <configuration>
-                    <mainClass>controller.Application</mainClass>
-                    <layout>ZIP</layout>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
