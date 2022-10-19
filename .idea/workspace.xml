@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bbc29ca-8cc5-450b-97b8-f7b97d5d4c54" name="Changes" comment="fix: maven dependency">
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system.properties" beforeDir="false" afterPath="$PROJECT_DIR$/system.properties" afterDir="false" />
-    </list>
+    <list default="true" id="2bbc29ca-8cc5-450b-97b8-f7b97d5d4c54" name="Changes" comment="fix: maven version" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -68,12 +65,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "E:/Study/UPC/Ciclos/Ciclo2022-01/DesignOfExperiments/Codes/ServerSideSoftware-DExperimentosISW/src/main/java/com/appdhome/resource",
     "node.js.detected.package.eslint": "true",
@@ -237,7 +236,7 @@
       <workItem from="1654799970302" duration="522000" />
       <workItem from="1656388179942" duration="263000" />
       <workItem from="1656392702832" duration="9163000" />
-      <workItem from="1666149819988" duration="432000" />
+      <workItem from="1666149819988" duration="790000" />
     </task>
     <task id="LOCAL-00001" summary="fix: maven dependency">
       <created>1666150184074</created>
@@ -246,7 +245,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666150184074</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fix: maven version">
+      <created>1666150398643</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1666150398643</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -272,7 +278,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix: maven dependecy" />
     <MESSAGE value="fix: maven dependency" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: maven dependency" />
+    <MESSAGE value="fix: maven version" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: maven version" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
